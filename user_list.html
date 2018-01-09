@@ -1,0 +1,521 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="O3Cna8mU0pAADteOj6lFyPDutpvX7CDfq722ZNgM">
+
+    <title>医療ガス安全管理システム</title>
+
+    <!-- Styles -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+    <link href="css/common.css" rel="stylesheet">
+    <link href="css/userlist.css?1514284363" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+
+                    <!-- Collapsed Hamburger -->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <!-- Branding Image -->
+                    <a class="navbar-brand" href="home.html">
+                        医療ガス安全管理システム
+                    </a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="nav navbar-nav">
+                        &nbsp;
+                    </ul>
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- Authentication Links -->
+							<li><a href="group_invitation.html"><span class="mw">グループ招待</span></a></li>
+                            <li><a href="inspection_list.html"><span class="mw">点検管理</span></a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <span class="mw">マスタ管理 <span class="caret"></span></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="user_list.html">ユーザーマスター</a>
+                                        <a href="equipment_list.html">機器マスター</a>
+                                        <a href="equipment_category_list.html">機器種類マスター</a>
+                                        <a href="Attribute_list.html">属性マスター</a>
+                                        <a href="location_list.html">場所マスター</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <span class="mw">ユーザー名<span class="caret"></span></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="personal_settings.html">個人設定</a>
+                                        <a href="login.html">ログアウト</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pankz-list">
+        <a href="home.html">ホーム</span></a>　/　
+        <a href="user_list.html">ユーザー一覧</span></a>　/　
+    </div>
+    <div class="row">
+        <!-- 検索項目入力 -->
+        <div id="edit-form" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <form class="form-horizontal">
+                <!-- ユーザー名 -->
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-2" for="InputName">ユーザー名</label>
+                    <div class="col-xs-10 col-sm-9">
+                        <input type="text" class="form-control" id="InputName" placeholder="ユーザー名を入力してください">
+                    </div>
+                    <i id="search-plus" class="fa fa-plus-square fa-skyblue fa-2x" aria-hidden="true"></i>
+                </div>
+                <div id="search-detail" style="display:none;">
+                    <!-- メールアドレス -->
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="InputEmail">メール・アドレス</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="InputEmail" placeholder="メール・アドレスを入力してください">
+                        </div>
+                    </div>
+                    <!-- ハッシュタグ -->
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="checkbox">ハッシュタグ</label>
+                        <div class="col-sm-10" id="checkbox">
+                            <div class="checkbox">
+                                <label class="hashtag" style="background:#F39800;">
+                                    <input type="checkbox" class="chk chk-tag" value="1" checked> #委員長
+                                </label>
+                                <label class="hashtag" style="background:#009944;">
+                                    <input type="checkbox" class="chk chk-tag" value="2" checked> #実施責任者
+                                </label>
+                                <label class="hashtag" style="background:#1D2088;">
+                                    <input type="checkbox" class="chk chk-tag" value="3" checked> #システム管理者
+                                </label>
+                                <label class="hashtag" style="background:#0068B7;">
+                                    <input type="checkbox" class="chk chk-tag" value="4" checked> #予備1
+                                </label>
+                                <label class="hashtag" style="background:#E60012;">
+                                    <input type="checkbox" class="chk chk-tag" value="5" checked> #予備2
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 登録日順 -->
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="InputSelect">登録日順</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="InputSelect">
+                                <option value="new">新しいもの順</option>
+                                <option value="old">古いもの順</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" id="form-search" class="btn btn-default col-xs-12 col-sm-offset-10 col-sm-2"><i class="fa fa-search fa-fw" aria-hidden="true"></i>検索</button>
+            </form>
+        </div>
+
+        <!-- 一覧 -->
+        <div id="edit-list" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h3 class="col-xs-12 col-sm-10 col-md-10 col-lg-10">ユーザー一覧</h3>
+            <div id="tbl-area" class="table-responsive col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>項番</th>
+                                <th>ユーザー名</th>
+                                <th>ハッシュタグ</th>
+                                <th>メールアドレス</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="tag-id text-center">1</td>
+                                <td>Madie Metz</td>
+                                <td>
+                                    <label class="attribute-tag" style="background:#F39800">委員長</label>
+                                </td>
+                                <td>kmuller@example.com</td>
+                                <td>
+                                    <button value="1" class="update-edit btn btn-default edit col-xs-12 col-sm-12 col-md-12 col-lg-12">詳細</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tag-id text-center">2</td>
+                                <td>Prof. Frank Altenwerth</td>
+                                <td>
+                                    <label class="attribute-tag" style="background:#009944">実施責任者</label>
+                                </td>
+                                <td>corbin.beer@example.com</td>
+                                <td>
+                                    <button value="2" class="update-edit btn btn-default edit col-xs-12 col-sm-12 col-md-12 col-lg-12">詳細</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tag-id text-center">3</td>
+                                <td>Nyah Weimann</td>
+                                <td>
+                                    <label class="attribute-tag" style="background:#009944">実施責任者</label>
+                                </td>
+                                <td>emmet.rodriguez@example.org</td>
+                                <td>
+                                    <button value="3" class="update-edit btn btn-default edit col-xs-12 col-sm-12 col-md-12 col-lg-12">詳細</button>
+                                </td>
+                            </tr>
+                                                    <tr>
+                                <td class="tag-id text-center">4</td>
+                                <td>Mr. Wilton Schinner MD</td>
+                                <td>
+                                                                            <label class="attribute-tag" style="background:#009944">実施責任者</label>
+                                                                    </td>
+                                <td>davis.reyes@example.org</td>
+                                <td>
+                                    <button value="4" class="update-edit btn btn-default edit col-xs-12 col-sm-12 col-md-12 col-lg-12">詳細</button>
+                                </td>
+                            </tr>
+                                                    <tr>
+                                <td class="tag-id text-center">5</td>
+                                <td>Hassan Boyle</td>
+                                <td>
+                                                                            <label class="attribute-tag" style="background:#009944">実施責任者</label>
+                                                                    </td>
+                                <td>tanderson@example.org</td>
+                                <td>
+                                    <button value="5" class="update-edit btn btn-default edit col-xs-12 col-sm-12 col-md-12 col-lg-12">詳細</button>
+                                </td>
+                            </tr>
+                                                    <tr>
+                                <td class="tag-id text-center">6</td>
+                                <td>Miss Kaycee Gislason II</td>
+                                <td>
+                                                                            <label class="attribute-tag" style="background:#009944">実施責任者</label>
+                                                                    </td>
+                                <td>dewitt.denesik@example.net</td>
+                                <td>
+                                    <button value="6" class="update-edit btn btn-default edit col-xs-12 col-sm-12 col-md-12 col-lg-12">詳細</button>
+                                </td>
+                            </tr>
+                                                    <tr>
+                                <td class="tag-id text-center">7</td>
+                                <td>Ashly Littel</td>
+                                <td>
+                                                                            <label class="attribute-tag" style="background:#009944">実施責任者</label>
+                                                                    </td>
+                                <td>hilario69@example.org</td>
+                                <td>
+                                    <button value="7" class="update-edit btn btn-default edit col-xs-12 col-sm-12 col-md-12 col-lg-12">詳細</button>
+                                </td>
+                            </tr>
+                                                    <tr>
+                                <td class="tag-id text-center">8</td>
+                                <td>Dr. Rudy Rau</td>
+                                <td>
+                                                                            <label class="attribute-tag" style="background:#009944">実施責任者</label>
+                                                                    </td>
+                                <td>edickinson@example.com</td>
+                                <td>
+                                    <button value="8" class="update-edit btn btn-default edit col-xs-12 col-sm-12 col-md-12 col-lg-12">詳細</button>
+                                </td>
+                            </tr>
+                                                    <tr>
+                                <td class="tag-id text-center">9</td>
+                                <td>Mr. Frank Wilderman IV</td>
+                                <td>
+                                                                            <label class="attribute-tag" style="background:#009944">実施責任者</label>
+                                                                    </td>
+                                <td>daphney55@example.com</td>
+                                <td>
+                                    <button value="9" class="update-edit btn btn-default edit col-xs-12 col-sm-12 col-md-12 col-lg-12">詳細</button>
+                                </td>
+                            </tr>
+                                                    <tr>
+                                <td class="tag-id text-center">10</td>
+                                <td>Zack Blanda</td>
+                                <td>
+                                                                            <label class="attribute-tag" style="background:#009944">実施責任者</label>
+                                                                    </td>
+                                <td>geovanny43@example.org</td>
+                                <td>
+                                    <button value="10" class="update-edit btn btn-default edit col-xs-12 col-sm-12 col-md-12 col-lg-12">詳細</button>
+                                </td>
+                            </tr>
+                                                    <tr>
+                                <td class="tag-id text-center">11</td>
+                                <td>Sallie Effertz Jr.</td>
+                                <td>
+                                                                            <label class="attribute-tag" style="background:#009944">実施責任者</label>
+                                                                    </td>
+                                <td>xdaniel@example.net</td>
+                                <td>
+                                    <button value="11" class="update-edit btn btn-default edit col-xs-12 col-sm-12 col-md-12 col-lg-12">詳細</button>
+                                </td>
+                            </tr>
+                                                    <tr>
+                                <td class="tag-id text-center">12</td>
+                                <td>Prof. Waino Hackett Jr.</td>
+                                <td>
+                                                                            <label class="attribute-tag" style="background:#009944">実施責任者</label>
+                                                                    </td>
+                                <td>sparisian@example.net</td>
+                                <td>
+                                    <button value="12" class="update-edit btn btn-default edit col-xs-12 col-sm-12 col-md-12 col-lg-12">詳細</button>
+                                </td>
+                            </tr>
+                                                    <tr>
+                                <td class="tag-id text-center">13</td>
+                                <td>Rodolfo Flatley V</td>
+                                <td>
+                                                                            <label class="attribute-tag" style="background:#009944">実施責任者</label>
+                                                                    </td>
+                                <td>ihirthe@example.net</td>
+                                <td>
+                                    <button value="13" class="update-edit btn btn-default edit col-xs-12 col-sm-12 col-md-12 col-lg-12">詳細</button>
+                                </td>
+                            </tr>
+                                                    <tr>
+                                <td class="tag-id text-center">14</td>
+                                <td>Shanna Hoppe</td>
+                                <td>
+                                                                            <label class="attribute-tag" style="background:#009944">実施責任者</label>
+                                                                    </td>
+                                <td>srenner@example.net</td>
+                                <td>
+                                    <button value="14" class="update-edit btn btn-default edit col-xs-12 col-sm-12 col-md-12 col-lg-12">詳細</button>
+                                </td>
+                            </tr>
+                                                    <tr>
+                                <td class="tag-id text-center">15</td>
+                                <td>Ms. Margarett Goyette MD</td>
+                                <td>
+                                                                            <label class="attribute-tag" style="background:#009944">実施責任者</label>
+                                                                    </td>
+                                <td>nlind@example.org</td>
+                                <td>
+                                    <button value="15" class="update-edit btn btn-default edit col-xs-12 col-sm-12 col-md-12 col-lg-12">詳細</button>
+                                </td>
+                            </tr>
+                                                    <tr>
+                                <td class="tag-id text-center">16</td>
+                                <td>Kira Kshlerin</td>
+                                <td>
+                                                                            <label class="attribute-tag" style="background:#009944">実施責任者</label>
+                                                                    </td>
+                                <td>flossie.hane@example.net</td>
+                                <td>
+                                    <button value="16" class="update-edit btn btn-default edit col-xs-12 col-sm-12 col-md-12 col-lg-12">詳細</button>
+                                </td>
+                            </tr>
+                                                    <tr>
+                                <td class="tag-id text-center">17</td>
+                                <td>Dr. Theo Davis Sr.</td>
+                                <td>
+                                                                            <label class="attribute-tag" style="background:#009944">実施責任者</label>
+                                                                    </td>
+                                <td>kreiger.marcelle@example.net</td>
+                                <td>
+                                    <button value="17" class="update-edit btn btn-default edit col-xs-12 col-sm-12 col-md-12 col-lg-12">詳細</button>
+                                </td>
+                            </tr>
+                                                    <tr>
+                                <td class="tag-id text-center">18</td>
+                                <td>Stan Kuvalis III</td>
+                                <td>
+                                    <label class="attribute-tag" style="background:#009944">実施責任者</label>
+                                </td>
+                                <td>wehner.misty@example.com</td>
+                                <td>
+                                    <button value="18" class="update-edit btn btn-default edit col-xs-12 col-sm-12 col-md-12 col-lg-12">詳細</button>
+                                </td>
+                            </tr>
+                                                    <tr>
+                                <td class="tag-id text-center">19</td>
+                                <td>Charlie Parker</td>
+                                <td>
+                                    <label class="attribute-tag" style="background:#009944">実施責任者</label>
+                                </td>
+                                <td>oharvey@example.net</td>
+                                <td>
+                                    <button value="19" class="update-edit btn btn-default edit col-xs-12 col-sm-12 col-md-12 col-lg-12">詳細</button>
+                                </td>
+                            </tr>
+                                                    <tr>
+                                <td class="tag-id text-center">20</td>
+                                <td>Tiana Legros</td>
+                                <td>
+                                    <label class="attribute-tag" style="background:#009944">実施責任者</label>
+                                </td>
+                                <td>nash80@example.net</td>
+                                <td>
+                                    <button value="20" class="update-edit btn btn-default edit col-xs-12 col-sm-12 col-md-12 col-lg-12">詳細</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div>
+        <a href="#" id="top-scroll" class="first-right"><i class="fa fa-arrow-circle-up fa-4x" aria-hidden="true"></i><p class="text-center">先頭へ</p></a>
+    </div>
+</div>
+    </div>
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/ajax.js"></script>
+    <script type="text/javascript">
+    var param = [];
+    var position = 20;
+
+    //
+    // 検索処理
+    //
+    $('#form-search').on('click', function() {
+        // ローディング表示
+        dispLoading('処理中･･･');
+
+        // param = [{
+        //     name : $('#InputName').val(),
+        //     email : $('#InputEmail').val(),
+        //     updated_at : $('#InputSelect').val(),
+        //     attribute : $('.chk:checked').map(function(){
+        //         return $(this).val();
+        //     }).get(),
+        //     position : 0
+        // }];
+        //
+        // // テーブル情報取得
+        // var ajax = request('/user_get',param,'O3Cna8mU0pAADteOj6lFyPDutpvX7CDfq722ZNgM','get');
+        //
+        // ajax.done(function(response, textStatus, jqXHR) {
+        //     $('#tbl-area tbody').empty();
+        //     $('#tbl-area tbody').append(response);
+        // }).fail(function(jqXHR, textStatus, errorThrown ) {
+        //
+        // });
+        //
+        // position = 20;
+
+        // ローディング終了
+        $("#loading").remove();
+    });
+
+    //
+    // 新規登録画面へ移動
+    //
+    $('#new-edit').on('click', function() {
+        location.href = "user_edit.html";
+    });
+
+    //
+    // 変更登録画面へ移動
+    //
+    $(document).on('click',".update-edit",function() {
+        location.href = "user_edit.html" + "?id=" + $(this).val();
+    });
+
+    //
+    // トップへスクロール
+    //
+    $('#top-scroll').on('click',function(){
+        var position = $(".navbar-static-top").offset().top;
+        $("html,body").animate({
+            scrollTop : position
+        }, {
+            queue : false
+        });
+    });
+
+    //
+    // 検索窓表示
+    //
+    $('#search-plus').on('click',function(){
+        $('#search-detail').toggle(function() {
+            if ($(this).is(':visible')) {
+                //「+」→「-」アイコンへ変更
+                $('#search-plus').removeClass('fa-plus-square fa-skyblue');
+                $('#search-plus').addClass('fa-minus-square fa-red');
+            } else {
+                //「-」→「+」アイコンへ変更
+                $('#search-plus').removeClass('fa-minus-square fa-red');
+                $('#search-plus').addClass('fa-plus-square fa-skyblue');
+            }
+        });
+    });
+
+    //
+    // ハッシュタグ操作
+    //
+    $('.chk-tag').on('click',function(){
+        $(this).parent('.hashtag').toggleClass('not-checked');
+    });
+
+    //
+    // スクロールが一番下の時に発火するイベント
+    //
+    $(window).on('scroll', function(){
+        var docHeight = $(document).innerHeight(), //ドキュメントの高さ
+            windowHeight = $(window).innerHeight(), //ウィンドウの高さ
+            pageBottom = docHeight - windowHeight; //ドキュメントの高さ - ウィンドウの高さ
+        if(pageBottom == $(window).scrollTop()) {
+            // ローディング表示
+            dispLoading('処理中･･･');
+
+            // param = [{
+            //     name : $('#InputName').val(),
+            //     email : $('#InputEmail').val(),
+            //     updated_at : $('#InputSelect').val(),
+            //     attribute : $('.chk:checked').map(function(){
+            //         return $(this).val();
+            //     }).get(),
+            //     position : position
+            // }];
+            //
+            // // テーブル情報取得
+            // var ajax = request('/user_get',param,'O3Cna8mU0pAADteOj6lFyPDutpvX7CDfq722ZNgM','get');
+            //
+            // ajax.done(function(response, textStatus, jqXHR) {
+            //     $('#tbl-area tbody').append(response);
+            // }).fail(function(jqXHR, textStatus, errorThrown ) {
+            //
+            // });
+            //
+            // position += 20;
+
+            // ローディング終了
+            $("#loading").remove();
+        }
+    });
+</script>
+</body>
+</html>
