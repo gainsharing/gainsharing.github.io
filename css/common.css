@@ -10,7 +10,7 @@ body{
 	width: 100%;
 }
 
-.navbar-static-top{
+.navbar-fixed-top{
 	padding-left: 3em;
 	padding-right: 3em;
 }
