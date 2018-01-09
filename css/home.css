@@ -39,7 +39,7 @@ body{
 
 .btn1:hover{
 	color:white;
-	background-color: pink;
+	background-color: #FA5858;
 	border: 1px solid red;
 }
 
@@ -51,7 +51,7 @@ body{
 .btn2:hover{
 	color:white;
 	background-color: #5882FA;
-	border: 1px solid red;
+	border: 1px solid blue;
 }
 
 .btn3{
@@ -62,7 +62,7 @@ body{
 .btn3:hover{
 	color:white;
 	background-color: #01DF01;
-	border: 1px solid red;
+	border: 1px solid green;
 }
 
 #controll-panel{
