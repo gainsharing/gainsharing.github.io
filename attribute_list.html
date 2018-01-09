@@ -171,11 +171,10 @@
                         </tbody>
                 </table>
             </div>
-            <button id="edit" class="btn btn-default col-xs-12 col-sm-12 col-md-12 col-lg-12">登録</button>
         </div>
     </div>
     <div>
-        <a href="#" id="save" class="first-right"><i class="fa fa-check-circle fa-4x" aria-hidden="true"></i><p class="text-center">登録</p></a>
+        <a href="#" id="edit" class="first-right"><i class="fa fa-check-circle fa-4x" aria-hidden="true"></i><p class="text-center">登録</p></a>
     </div>
 </div>
     </div>
@@ -185,6 +184,7 @@
     <script type="text/javascript" src="js/ajax.js"></script>
     <script type="text/javascript" src="js/attribute.js?1514427397"></script>
 <script type="text/javascript" src="js/jquery.colorbox.js?1514427397"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
     //
     // 画面ロード処理
@@ -244,6 +244,16 @@
         //     // 失敗アラート表示
         //     editAfterAlert(false);
         // });
+
+        // sample4
+        var options = {
+            title: "登録成功",
+            text: "アラートは自動的に閉じます",
+            icon: "success", // warning, info, error
+            timer: 1500, // 3秒後に自動的にアラートを閉じる
+            buttons: false,
+          }
+        swal(options)
 
         // ローディング終了
         $("#loading").remove();

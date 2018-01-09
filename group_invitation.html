@@ -120,7 +120,7 @@
 				グループキーは、一定時間経過後自動的に削除されます。<br>
 				有効期限内に、招待するユーザーへグループキーをお知らせしてください。
 			</p>
-            <button class="btn btn-default col-xs-12 col-sm-12 col-md-12 col-lg-12"><i class="fa fa-key fa-fw" aria-hidden="true"></i>新規グループキー発行</button>
+            <button class="btn btn-default col-xs-12 col-sm-12 col-md-12 col-lg-12" id="edit"><i class="fa fa-key fa-fw" aria-hidden="true"></i>新規グループキー発行</button>
         </div>
     </div>
 </div>
@@ -130,71 +130,30 @@
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/ajax.js"></script>
     <script type="text/javascript" src="js/attribute.js?1514427397"></script>
-<script type="text/javascript" src="js/jquery.colorbox.js?1514427397"></script>
-<script type="text/javascript">
-    //
-    // 画面ロード処理
-    //
-    $(function(){
-        //バリデーションセット
+    <script type="text/javascript" src="js/jquery.colorbox.js?1514427397"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript">
 
-        // 色選択ボックスプロパティセット
-        $(".selector").colorbox({
-          labels: [ '赤', '橙', '黄', '緑', '青', '藍', '紫' ],
-          colors: [ 'E60012', 'F39800', 'FFF100', '009944', '0068B7', '1D2088', '920783'],
-          width: 50,
-          height: 50,
-          perLine: 4
-        });
-    });
-
-    //
-    // 登録
-    //
-    $('#edit').on('click', function() {
-        // ローディング表示
-        dispLoading('処理中･･･');
-
-        // var param = [];
-        // // テーブル格納
-        // var table = $('.table').children('tbody').children();
-        // var id,color,name
-        // // タグ一覧分データをセット
-        // $(table).each(function(index, element){
-        //     // DOM値取得
-        //     id = $(element).children('.tag-id').text();
-        //     color = $(element).children('.tag-color').text();
-        //     name = $(element).children('.tag-name').children('.form-group').children('.form-tag-name').val();
-        //     // 行データ格納
-        //     param.push({
-        //             id:index+1,
-        //             name:name,
-        //             color:color,
-        //     });
-        // });
-        // // 登録
-        // var ajax = request('/attribute_edit',param,'hMKbckvT5tV1CpWdcDzGs7qYGUd0oRoKcHl2TM0H');
         //
-		// ajax.done(function(response, textStatus, jqXHR) {
-        //     // JSONをパース
-        //     var data = JSON.parse(response);
-        //     // INSERT/UPDATE/DELET
-        //     if(data.result == true){
-        //         // 成功アラート表示
-        //         editAfterAlert(true);
-        //     }else{
-        //         // 失敗アラート表示
-        //         editAfterAlert(false);
-        //     }
-        // }).fail(function(jqXHR, textStatus, errorThrown ) {
-        //     // 失敗アラート表示
-        //     editAfterAlert(false);
-        // });
+        // 登録
+        //
+        $('#edit').on('click', function() {
+            // ローディング表示
+            dispLoading('処理中･･･');
 
-        // ローディング終了
-        $("#loading").remove();
-    });
+            var options = {
+    		    title: "グループキーが発行されました",
+    		    text: "アラートは自動的に閉じます",
+    		    icon: "info", // warning, info, error
+    		    timer: 1500, // 3秒後に自動的にアラートを閉じる
+    		    buttons: false,
+    		  }
+    		swal(options)
 
-</script>
+            // ローディング終了
+            $("#loading").remove();
+        });
+
+    </script>
 </body>
 </html>

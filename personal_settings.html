@@ -175,6 +175,7 @@
     <script src="js/app.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/ajax.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript">
     function create_edit(){
         location.href = "user_edit.html";
@@ -198,42 +199,14 @@
         // ローディング表示
         dispLoading('処理中･･･');
 
-        // // チェック済み属性取得
-        // var tags = $('.chk-tag:checked').map(function(){
-        //   return $(this).val();
-        // }).get();
-        //
-        // // チェック済み担当設備取得
-        // var equipments = $('.chk-equipment:checked').map(function(){
-        //   return $(this).val();
-        // }).get();
-        //
-        // var param = {
-        //     id: '1',
-        //     name: $('#InputName').val(),
-        //     email: $('#InputEmail').val(),
-        //     attributes: tags,
-        //     equipments: equipments,
-        // };
-        //
-        // // 登録
-        // var ajax = request('/user_save',param,'O3Cna8mU0pAADteOj6lFyPDutpvX7CDfq722ZNgM');
-        //
-        // ajax.done(function(response, textStatus, jqXHR) {
-        //     // JSONをパース
-        //     var data = JSON.parse(response);
-        //     // INSERT/UPDATE/DELET
-        //     if(data.result == true){
-        //         // 成功アラート表示
-        //         editAfterAlert(true);
-        //     }else{
-        //         // 失敗アラート表示
-        //         editAfterAlert(false);
-        //     }
-        // }).fail(function(jqXHR, textStatus, errorThrown ) {
-        //     // 失敗アラート表示
-        //     editAfterAlert(false);
-        // });
+        var options = {
+		    title: "登録成功",
+		    text: "アラートは自動的に閉じます",
+		    icon: "success", // warning, info, error
+		    timer: 1500, // 3秒後に自動的にアラートを閉じる
+		    buttons: false,
+		  }
+		swal(options)
 
         // ローディング終了
         $("#loading").remove();

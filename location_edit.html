@@ -114,6 +114,27 @@
     <!-- Scripts -->
     <script src="js/app.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
-</script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript">
+    //
+    // 登録
+    //
+    $('#save').on('click', function() {
+        // ローディング表示
+        dispLoading('処理中･･･');
+
+        var options = {
+            title: "登録成功",
+            text: "アラートは自動的に閉じます",
+            icon: "success", // warning, info, error
+            timer: 1500, // 3秒後に自動的にアラートを閉じる
+            buttons: false,
+          }
+        swal(options)
+
+        // ローディング終了
+        $("#loading").remove();
+    });
+    </script>
 </body>
 </html>
