@@ -4,3 +4,16 @@
     -moz-box-shadow:rgba(122, 122, 122, 0.1588235) 0px 0px 6px 3px;
     word-wrap:break-all;
 }
+
+#group-add{
+    background-color: red;
+    color: white;
+    height: 3em;
+}
+
+#group-add:hover{
+    background-color: #FE2E2E;
+    border: 1px solid red;
+    color: white;
+    height: 3em;
+}
