@@ -207,8 +207,10 @@
 		    icon: "success", // warning, info, error
 		    timer: 1500, // 3秒後に自動的にアラートを閉じる
 		    buttons: false,
-		  }
-		swal(options)
+		};
+		swal(options).then(function(){
+			location.href = "inspection_act_list.html";
+		});
 
         // ローディング終了
         $("#loading").remove();
