@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="hMKbckvT5tV1CpWdcDzGs7qYGUd0oRoKcHl2TM0H">
+
+    <title>医療ガス安全管理システム</title>
+
+    <!-- Styles -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+    <link href="css/common.css" rel="stylesheet">
+    <link href="css/attribute.css?1514427397" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+
+                    <!-- Collapsed Hamburger -->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <!-- Branding Image -->
+                    <a class="navbar-brand" href="home.html">
+                        医療ガス安全管理システム
+                    </a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="nav navbar-nav">
+                        &nbsp;
+                    </ul>
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- Authentication Links -->
+							<li><a href="group_invitation.html"><span class="mw">グループ招待</span></a></li>
+                            <li><a href="inspection_list.html"><span class="mw">点検管理</span></a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <span class="mw">マスタ管理 <span class="caret"></span></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+										<a href="user_list.html">ユーザーマスター</a>
+                                        <a href="equipment_list.html">機器マスター</a>
+										<a href="equipment_category_list.html">機器種類マスター</a>
+                                        <a href="Attribute_list.html">属性マスター</a>
+                                        <a href="location_list.html">場所マスター</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <span class="mw">ユーザー名<span class="caret"></span></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="personal_settings.html">個人設定</a>
+                                        <a href="login.html">ログアウト</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+    <div class="col-xs-offset-1 col-sm-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-xs-10 col-sm-10 col-md-10 col-lg-10">
+        <p>
+            <a href="home.html">ホーム</span></a>　/　
+            <a href="attribute_list.html">属性一覧・編集</span></a>
+        </p>
+    </div>
+    <div class="row">
+        <!-- 検索項目入力 -->
+        <div id="edit-form" class="col-xs-offset-1 col-sm-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-xs-10 col-sm-10 col-md-10 col-lg-10">
+            <h3>タグ一覧</h3>
+            <div id="tbl-area" class="table-responsive">
+                <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-1 col-ms-1 col-md-1 col-lg-1 text-center">項番</th>
+                                <th class="col-xs-1 col-ms-1 col-md-1 col-lg-1 text-center">カラー</th>
+                                <th class="col-xs-10 col-ms-10 col-md-10 col-lg-10 text-center">タグ名</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="tag-id text-center">1</td>
+                                <td class="tag-color text-center">
+                                    <div class="selector center-block" style="width: 30px;height: 30px;cursor: pointer;backgroundColor:#F39800;"></div>
+                                    <label class="color-code">#F39800</label>
+                                </td>
+                                <td class="tag-name">
+                                    <div class="form-group">
+                                        <input type="text" name="tag-name" class="form-control form-tag-name" placeholder="タグ名" value="委員長" maxlength="255">
+                                        <span class="glyphicon form-control-feedback" aria-hidden="false"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tag-id text-center">2</td>
+                                <td class="tag-color text-center">
+                                    <div class="selector center-block" style="width: 30px;height: 30px;cursor: pointer;backgroundColor:#009944;"></div>
+                                    <label class="color-code">#009944</label>
+                                </td>
+                                <td class="tag-name">
+                                    <div class="form-group">
+                                        <input type="text" name="tag-name" class="form-control form-tag-name" placeholder="タグ名" value="実施責任者" maxlength="255">
+                                        <span class="glyphicon form-control-feedback" aria-hidden="false"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tag-id text-center">3</td>
+                                <td class="tag-color text-center">
+                                    <div class="selector center-block" style="width: 30px;height: 30px;cursor: pointer;backgroundColor:#1D2088;"></div>
+                                    <label class="color-code">#1D2088</label>
+                                </td>
+                                <td class="tag-name">
+                                    <div class="form-group">
+                                        <input type="text" name="tag-name" class="form-control form-tag-name" placeholder="タグ名" value="システム管理者" maxlength="255">
+                                        <span class="glyphicon form-control-feedback" aria-hidden="false"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tag-id text-center">4</td>
+                                <td class="tag-color text-center">
+                                    <div class="selector center-block" style="width: 30px;height: 30px;cursor: pointer;backgroundColor:#0068B7;"></div>
+                                    <label class="color-code">#0068B7</label>
+                                </td>
+                                <td class="tag-name">
+                                    <div class="form-group">
+                                        <input type="text" name="tag-name" class="form-control form-tag-name" placeholder="タグ名" value="予備1" maxlength="255">
+                                        <span class="glyphicon form-control-feedback" aria-hidden="false"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tag-id text-center">5</td>
+                                <td class="tag-color text-center">
+                                    <div class="selector center-block" style="width: 30px;height: 30px;cursor: pointer;backgroundColor:#E60012;"></div>
+                                    <label class="color-code">#E60012</label>
+                                </td>
+                                <td class="tag-name">
+                                    <div class="form-group">
+                                        <input type="text" name="tag-name" class="form-control form-tag-name" placeholder="タグ名" value="予備2" maxlength="255">
+                                        <span class="glyphicon form-control-feedback" aria-hidden="false"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+            <button id="edit" class="btn btn-default col-xs-12 col-sm-12 col-md-12 col-lg-12">登録</button>
+        </div>
+    </div>
+    <div>
+        <a href="#" id="save" class="first-right"><i class="fa fa-check-circle fa-4x" aria-hidden="true"></i><p class="text-center">登録</p></a>
+    </div>
+</div>
+    </div>
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/ajax.js"></script>
+    <script type="text/javascript" src="js/attribute.js?1514427397"></script>
+<script type="text/javascript" src="js/jquery.colorbox.js?1514427397"></script>
+<script type="text/javascript">
+    //
+    // 画面ロード処理
+    //
+    $(function(){
+        //バリデーションセット
+
+        // 色選択ボックスプロパティセット
+        $(".selector").colorbox({
+          labels: [ '赤', '橙', '黄', '緑', '青', '藍', '紫' ],
+          colors: [ 'E60012', 'F39800', 'FFF100', '009944', '0068B7', '1D2088', '920783'],
+          width: 50,
+          height: 50,
+          perLine: 4
+        });
+    });
+
+    //
+    // 登録
+    //
+    $('#edit').on('click', function() {
+        // ローディング表示
+        dispLoading('処理中･･･');
+
+        // var param = [];
+        // // テーブル格納
+        // var table = $('.table').children('tbody').children();
+        // var id,color,name
+        // // タグ一覧分データをセット
+        // $(table).each(function(index, element){
+        //     // DOM値取得
+        //     id = $(element).children('.tag-id').text();
+        //     color = $(element).children('.tag-color').text();
+        //     name = $(element).children('.tag-name').children('.form-group').children('.form-tag-name').val();
+        //     // 行データ格納
+        //     param.push({
+        //             id:index+1,
+        //             name:name,
+        //             color:color,
+        //     });
+        // });
+        // // 登録
+        // var ajax = request('/attribute_edit',param,'hMKbckvT5tV1CpWdcDzGs7qYGUd0oRoKcHl2TM0H');
+        //
+		// ajax.done(function(response, textStatus, jqXHR) {
+        //     // JSONをパース
+        //     var data = JSON.parse(response);
+        //     // INSERT/UPDATE/DELET
+        //     if(data.result == true){
+        //         // 成功アラート表示
+        //         editAfterAlert(true);
+        //     }else{
+        //         // 失敗アラート表示
+        //         editAfterAlert(false);
+        //     }
+        // }).fail(function(jqXHR, textStatus, errorThrown ) {
+        //     // 失敗アラート表示
+        //     editAfterAlert(false);
+        // });
+
+        // ローディング終了
+        $("#loading").remove();
+    });
+
+</script>
+</body>
+</html>
