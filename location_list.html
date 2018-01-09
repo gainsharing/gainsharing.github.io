@@ -20,7 +20,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
 
@@ -83,11 +83,12 @@
         </nav>
 
         <div class="container">
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pankz-list">
-		<a href="home.html">ホーム</span></a>　/　
-		<a href="location_list.html">場所一覧</span></a>　
-	</div>
+
     <div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pankz-list">
+			<a href="home.html">ホーム</span></a>　/　
+			<a href="location_list.html">場所一覧</span></a>　
+		</div>
         <!-- 検索項目入力 -->
         <div id="edit-form" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <form class="form-horizontal">
@@ -223,7 +224,7 @@
     // トップへスクロール
     //
     $('#top-scroll').on('click',function(){
-        var position = $(".navbar-static-top").offset().top;
+        var position = $(".navbar-fixed-top").offset().top;
         $("html,body").animate({
             scrollTop : position
         }, {
