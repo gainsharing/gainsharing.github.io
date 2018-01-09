@@ -109,259 +109,103 @@
                     <label class="col-sm-2 control-label" for="InputName">点検ファイル</label>
                     <div class="col-sm-10">
                         <div id="ins-table">
-                            <table class="table table-bordered table-hover table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>点検種類</th>
-                                        <th>点検名</th>
-                                        <th>周期</th>
-                                        <th>開始日</th>
-                                        <th>テンプレートファイル</th>
-                                        <th>&nbsp;</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="inst-type-td">
-                                            <select class="form-control ins-type">
-                                                <option value="0">始業前点検</option>
-                                                <option value="1">日常点検</option>
-                                                <option value="2">定期点検</option>
-                                            </select>
-                                        </td>
-                                        <td class="ins-name-td">
-                                            <input type="text" class="form-control ins-name" placeholder="点検名を入力してください" value="始業前点検">
-                                        </td>
-                                        <td class="ins-cycle-td">
-                                            <select class="form-control ins-num" disabled>
-                                                <option value="0" selected></option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
-                                                <option value="10">10</option>
-                                                <option value="11">11</option>
-                                                <option value="12">12</option>
-                                                <option value="13">13</option>
-                                                <option value="14">14</option>
-                                                <option value="15">15</option>
-                                                <option value="16">16</option>
-                                                <option value="17">17</option>
-                                                <option value="18">18</option>
-                                                <option value="19">19</option>
-                                                <option value="20">20</option>
-                                                <option value="21">21</option>
-                                                <option value="22">22</option>
-                                                <option value="23">23</option>
-                                                <option value="24">24</option>
-                                                <option value="25">25</option>
-                                                <option value="26">26</option>
-                                                <option value="27">27</option>
-                                                <option value="28">28</option>
-                                                <option value="29">29</option>
-                                                <option value="30">30</option>
-                                                <option value="31">31</option>
-                                            </select>
-                                            <select class="form-control ins-cycle" disabled>
-                                                <option value="99"></option>
-                                                <option value="0">日</option>
-                                                <option value="1">週</option>
-                                                <option value="2">月</option>
-                                            </select>
-                                        </td>
-                                        <td  class="ins-start-dt-td">
-                                            <input type="text" class="form-control datepicker ins-start-dt" placeholder="点検開始日">
-                                        </td>
-                                        <td>
-                                            <p>
-                                                <input type="radio" name="file-upload-type" id="drag-and-drop" value="0" checked="checked"><label for="drag-and-drop">ドラッグ＆ドロップ</label>
-                                                <input type="radio" name="file-upload-type" id="file-click" value="1"><label for="file-click">選択</label>
-                                            </p>
-                                            <div id="file-drop">
-                                                <div id="dropzone" effectAllowed="move">Drog files here!</div>
-                                                <ul id="files">
-                                                    <li><a href="#"><i class="fa fa-file-pdf-o fa-fw" aria-hidden="true"></i>テンプレート１</a><i class="fa fa-times fa-2x trash-row-area" aria-hidden="true" style="color:red"></i></li>
-                                                    <li><a href="#"><i class="fa fa-file-pdf-o fa-fw" aria-hidden="true"></i>テンプレート２</a><i class="fa fa-times fa-2x trash-row-area" aria-hidden="true" style="color:red"></i></li>
-                                                    <li><a href="#"><i class="fa fa-file-pdf-o fa-fw" aria-hidden="true"></i>テンプレート３</a><i class="fa fa-times fa-2x trash-row-area" aria-hidden="true" style="color:red"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div id="file-select" style="display:none;">
-                                                <div class="file-select-form">
-                                                    <p class="input-file-btn btn btn-default">
-                                                      ファイルを選択
-                                                      <input type="file" class="input-file">
-                                                    </p>
-                                                    <span>選択されていません</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td><button class="btn btn-default col-xs-12 col-sm-12 col-md-12 col-lg-12" onclick="delete_alert()">削除</button></td>
-                                    </tr>
-                                    <!-- <tr>
-                                        <td class="inst-type-td">
-                                            <select class="form-control ins-type">
-                                                <option value="0">始業前点検</option>
-                                                <option value="1" selected>日常点検</option>
-                                                <option value="2">定期点検</option>
-                                            </select>
-                                        </td>
-                                        <td class="ins-name-td">
-                                            <input type="text" class="form-control ins-name" placeholder="点検名を入力してください" value="日常点検">
-                                        </td>
-                                        <td class="ins-cycle-td">
-                                            <select class="form-control ins-num">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
-                                                <option value="10">10</option>
-                                                <option value="11">11</option>
-                                                <option value="12">12</option>
-                                                <option value="13">13</option>
-                                                <option value="14">14</option>
-                                                <option value="15">15</option>
-                                                <option value="16">16</option>
-                                                <option value="17">17</option>
-                                                <option value="18">18</option>
-                                                <option value="19">19</option>
-                                                <option value="20">20</option>
-                                                <option value="21">21</option>
-                                                <option value="22">22</option>
-                                                <option value="23">23</option>
-                                                <option value="24">24</option>
-                                                <option value="25">25</option>
-                                                <option value="26">26</option>
-                                                <option value="27">27</option>
-                                                <option value="28">28</option>
-                                                <option value="29">29</option>
-                                                <option value="30">30</option>
-                                                <option value="31">31</option>
-                                            </select>
-                                            <select class="form-control ins-cycle">
-                                                <option value="0">日</option>
-                                                <option value="1" selected>週</option>
-                                                <option value="2">ヶ月</option>
-                                            </select>
-                                        </td>
-                                        <td  class="ins-start-dt-td">
-                                            <input type="text" class="form-control datepicker ins-start-dt" placeholder="点検開始日">
-                                        </td>
-                                        <td>
-                                            <p>
-                                                <input type="radio" name="file-upload-type" id="drag-and-drop" value="0" checked="checked"><label for="drag-and-drop">ドラッグ＆ドロップ</label>
-                                                <input type="radio" name="file-upload-type" id="file-click" value="1"><label for="file-click">選択</label>
-                                            </p>
-                                            <div id="file-drop">
-                                                <div id="dropzone" effectAllowed="move">Drog files here!</div>
-                                                <ul id="files">
-                                                    <li><a href="#">点検チェックリストテンプレート１</a><i class="fa fa-times fa-2x trash-row-area" aria-hidden="true" style="color:red"></i></li>
-                                                    <li><a href="#">点検チェックリストテンプレート２</a><i class="fa fa-times fa-2x trash-row-area" aria-hidden="true" style="color:red"></i></li>
-                                                    <li><a href="#">点検チェックリストテンプレート３</a><i class="fa fa-times fa-2x trash-row-area" aria-hidden="true" style="color:red"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div id="file-select" style="display:none;">
-                                                <div class="file-select-form">
-                                                    <p class="input-file-btn btn btn-default">
-                                                      ファイルを選択
-                                                      <input type="file" class="input-file">
-                                                    </p>
-                                                    <span>選択されていません</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td><button class="btn btn-default col-xs-12 col-sm-12 col-md-12 col-lg-12">削除</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="inst-type-td">
-                                            <select class="form-control ins-type">
-                                                <option value="0">始業前点検</option>
-                                                <option value="1">日常点検</option>
-                                                <option value="2" selected>定期点検</option>
-                                            </select>
-                                        </td>
-                                        <td class="ins-name-td">
-                                            <input type="text" class="form-control ins-name" placeholder="点検名を入力してください" value="定期点検">
-                                        </td>
-                                        <td class="ins-cycle-td">
-                                            <select class="form-control ins-num">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
-                                                <option value="10">10</option>
-                                                <option value="11">11</option>
-                                                <option value="12">12</option>
-                                                <option value="13">13</option>
-                                                <option value="14">14</option>
-                                                <option value="15">15</option>
-                                                <option value="16">16</option>
-                                                <option value="17">17</option>
-                                                <option value="18">18</option>
-                                                <option value="19">19</option>
-                                                <option value="20">20</option>
-                                                <option value="21">21</option>
-                                                <option value="22">22</option>
-                                                <option value="23">23</option>
-                                                <option value="24">24</option>
-                                                <option value="25">25</option>
-                                                <option value="26">26</option>
-                                                <option value="27">27</option>
-                                                <option value="28">28</option>
-                                                <option value="29">29</option>
-                                                <option value="30">30</option>
-                                                <option value="31">31</option>
-                                            </select>
-                                            <select class="form-control ins-cycle">
-                                                <option value="0">日</option>
-                                                <option value="1">週</option>
-                                                <option value="2" selected>ヶ月</option>
-                                            </select>
-                                        </td>
-                                        <td  class="ins-start-dt-td">
-                                            <input type="text" class="form-control datepicker ins-start-dt" placeholder="点検開始日" value="2018/01/01">
-                                        </td>
-                                        <td>
-                                            <p>
-                                                <input type="radio" name="file-upload-type" id="drag-and-drop" value="0" checked="checked"><label for="drag-and-drop">ドラッグ＆ドロップ</label>
-                                                <input type="radio" name="file-upload-type" id="file-click" value="1"><label for="file-click">選択</label>
-                                            </p>
-                                            <div id="file-drop">
-                                                <div id="dropzone" effectAllowed="move">Drog files here!</div>
-                                                <ul id="files">
-                                                    <li><a href="#">点検チェックリストテンプレート１</a><i class="fa fa-times fa-2x trash-row-area" aria-hidden="true" style="color:red"></i></li>
-                                                    <li><a href="#">点検チェックリストテンプレート２</a><i class="fa fa-times fa-2x trash-row-area" aria-hidden="true" style="color:red"></i></li>
-                                                    <li><a href="#">点検チェックリストテンプレート３</a><i class="fa fa-times fa-2x trash-row-area" aria-hidden="true" style="color:red"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div id="file-select" style="display:none;">
-                                                <div class="file-select-form">
-                                                    <p class="input-file-btn btn btn-default">
-                                                      ファイルを選択
-                                                      <input type="file" class="input-file">
-                                                    </p>
-                                                    <span>選択されていません</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td><button class="btn btn-default col-xs-12 col-sm-12 col-md-12 col-lg-12">削除</button></td>
-                                    </tr> -->
-                                </tbody>
-                            </table>
+							<div class="table-responsive">
+	                            <table class="table table-bordered table-hover table-striped">
+	                                <thead>
+	                                    <tr>
+	                                        <th>点検種類</th>
+	                                        <th>点検名</th>
+	                                        <th>周期</th>
+	                                        <th>開始日</th>
+	                                        <th>テンプレートファイル</th>
+	                                        <th>&nbsp;</th>
+	                                    </tr>
+	                                </thead>
+	                                <tbody>
+	                                    <tr>
+	                                        <td class="inst-type-td">
+	                                            <select class="form-control ins-type">
+	                                                <option value="0">始業前点検</option>
+	                                                <option value="1">日常点検</option>
+	                                                <option value="2">定期点検</option>
+	                                            </select>
+	                                        </td>
+	                                        <td class="ins-name-td">
+	                                            <input type="text" class="form-control ins-name" placeholder="点検名を入力してください" value="始業前点検">
+	                                        </td>
+	                                        <td class="ins-cycle-td">
+	                                            <select class="form-control ins-num" disabled>
+	                                                <option value="0" selected></option>
+	                                                <option value="1">1</option>
+	                                                <option value="2">2</option>
+	                                                <option value="3">3</option>
+	                                                <option value="4">4</option>
+	                                                <option value="5">5</option>
+	                                                <option value="6">6</option>
+	                                                <option value="7">7</option>
+	                                                <option value="8">8</option>
+	                                                <option value="9">9</option>
+	                                                <option value="10">10</option>
+	                                                <option value="11">11</option>
+	                                                <option value="12">12</option>
+	                                                <option value="13">13</option>
+	                                                <option value="14">14</option>
+	                                                <option value="15">15</option>
+	                                                <option value="16">16</option>
+	                                                <option value="17">17</option>
+	                                                <option value="18">18</option>
+	                                                <option value="19">19</option>
+	                                                <option value="20">20</option>
+	                                                <option value="21">21</option>
+	                                                <option value="22">22</option>
+	                                                <option value="23">23</option>
+	                                                <option value="24">24</option>
+	                                                <option value="25">25</option>
+	                                                <option value="26">26</option>
+	                                                <option value="27">27</option>
+	                                                <option value="28">28</option>
+	                                                <option value="29">29</option>
+	                                                <option value="30">30</option>
+	                                                <option value="31">31</option>
+	                                            </select>
+	                                            <select class="form-control ins-cycle" disabled>
+	                                                <option value="99"></option>
+	                                                <option value="0">日</option>
+	                                                <option value="1">週</option>
+	                                                <option value="2">月</option>
+	                                            </select>
+	                                        </td>
+	                                        <td  class="ins-start-dt-td">
+	                                            <input type="text" class="form-control datepicker ins-start-dt" placeholder="点検開始日">
+	                                        </td>
+	                                        <td>
+	                                            <p>
+	                                                <input type="radio" name="file-upload-type" id="drag-and-drop" value="0" checked="checked"><label for="drag-and-drop">ドラッグ＆ドロップ</label>
+	                                                <input type="radio" name="file-upload-type" id="file-click" value="1"><label for="file-click">選択</label>
+	                                            </p>
+	                                            <div id="file-drop">
+	                                                <div id="dropzone" effectAllowed="move">Drog files here!</div>
+	                                                <ul id="files">
+	                                                    <li><a href="#"><i class="fa fa-file-pdf-o fa-fw" aria-hidden="true"></i>テンプレート１</a><i class="fa fa-times fa-2x trash-row-area" aria-hidden="true" style="color:red"></i></li>
+	                                                    <li><a href="#"><i class="fa fa-file-pdf-o fa-fw" aria-hidden="true"></i>テンプレート２</a><i class="fa fa-times fa-2x trash-row-area" aria-hidden="true" style="color:red"></i></li>
+	                                                    <li><a href="#"><i class="fa fa-file-pdf-o fa-fw" aria-hidden="true"></i>テンプレート３</a><i class="fa fa-times fa-2x trash-row-area" aria-hidden="true" style="color:red"></i></li>
+	                                                </ul>
+	                                            </div>
+	                                            <div id="file-select" style="display:none;">
+	                                                <div class="file-select-form">
+	                                                    <p class="input-file-btn btn btn-default">
+	                                                      ファイルを選択
+	                                                      <input type="file" class="input-file">
+	                                                    </p>
+	                                                    <span>選択されていません</span>
+	                                                </div>
+	                                            </div>
+	                                        </td>
+	                                        <td><button class="btn btn-default col-xs-12 col-sm-12 col-md-12 col-lg-12" onclick="delete_alert()">削除</button></td>
+	                                    </tr>
+	                                </tbody>
+	                            </table>
+							</div>
                         </div>
                         <button class="btn btn-default col-xs-12 col-sm-12 col-md-12 col-lg-12" onclick="add_alert()">行追加</button>
                     </div>
@@ -624,11 +468,11 @@
         }
 
         function add_alert(){
-            alert("【モック用未実装】予定では行が追加されます")
+            alert("【モック用未実装】予定では行が追加されます");
         }
 
         function delete_alert(){
-            alert("【モック用未実装】予定では行が削除されます")
+            alert("【モック用未実装】予定では行が削除されます");
         }
     </script>
 </body>
