@@ -1,0 +1,479 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="O3Cna8mU0pAADteOj6lFyPDutpvX7CDfq722ZNgM">
+
+    <title>医療ガス安全管理システム</title>
+
+    <!-- Styles -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+    <link href="css/common.css" rel="stylesheet">
+    <link href="css/equipmentcategoryedit.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="js/pickdate/themes/default.css" rel="stylesheet">
+    <link href="js/pickdate/themes/default.date.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+
+                    <!-- Collapsed Hamburger -->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <!-- Branding Image -->
+                    <a class="navbar-brand" href="home.html">
+                        医療ガス安全管理システム
+                    </a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="nav navbar-nav">
+                        <li><a>ログイン中グループ：株式会社ゲインシェアリング</a></li>
+                    </ul>
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- Authentication Links -->
+						    <li><a href="group_invitation.html"><span class="mw"><i class="fa fa-users fa-fw" aria-hidden="true"></i>グループ招待</span></a></li>
+                            <li><a href="inspection_list.html"><span class="mw"><i class="fa fa-check-square-o fa-fw" aria-hidden="true"></i>点検管理</span></a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <span class="mw"><i class="fa fa-database fa-fw" aria-hidden="true"></i>マスタ管理 <span class="caret"></span></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="user_list.html">ユーザーマスター</a>
+                                        <a href="equipment_list.html">設備マスター</a>
+                                        <a href="equipment_category_list.html">設備種類マスター</a>
+                                        <a href="attribute_list.html">属性マスター</a>
+                                        <a href="location_list.html">場所マスター</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <span class="mw"><i class="fa fa-user fa-fw" aria-hidden="true"></i>ユーザー名<span class="caret"></span></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+										<a href="personal_settings.html">個人設定</a>
+										<a href="group_select.html">グループ選択</a>
+                                        <a href="login.html">ログアウト</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+
+    <div class="row">
+		<div class="col-xs-offset-1 col-sm-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-xs-10 col-sm-10 col-md-10 col-lg-10">
+			<p>
+				<a href="home.html">ホーム</span></a>　/　
+				<a href="equipment_category_list.html">設備種類一覧</span></a>　/　
+				<a href="equipment_category_edit.html">設備種類登録</span></a>
+			</p>
+		</div>
+        <div id="edit-form" class="col-xs-offset-1 col-sm-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-xs-10 col-sm-10 col-md-10 col-lg-10">
+            <!-- タイトル -->
+            <h3>設備種類登録</h3>
+            <!-- フォーム -->
+            <form method="post" action="#" id="form" class="form-horizontal" name="form">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="InputName">設備種類名</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="InputName" placeholder="設備種類名" value="配管端末器(アウトレット)">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="InputName">点検ファイル</label>
+                    <div class="col-sm-10">
+                        <div id="ins-table">
+							<div class="table-responsive">
+	                            <table class="table table-bordered table-hover table-striped">
+	                                <thead>
+	                                    <tr>
+	                                        <th>点検種類</th>
+	                                        <th>点検名</th>
+	                                        <th>周期</th>
+	                                        <th>開始日</th>
+	                                        <th>テンプレートファイル</th>
+	                                        <th>&nbsp;</th>
+	                                    </tr>
+	                                </thead>
+	                                <tbody>
+	                                    <tr>
+	                                        <td class="inst-type-td">
+	                                            <select class="form-control ins-type">
+	                                                <option value="0">始業前点検</option>
+	                                                <option value="1">日常点検</option>
+	                                                <option value="2">定期点検</option>
+	                                            </select>
+	                                        </td>
+	                                        <td class="ins-name-td">
+	                                            <input type="text" class="form-control ins-name" placeholder="点検名を入力してください" value="始業前点検">
+	                                        </td>
+	                                        <td class="ins-cycle-td">
+	                                            <select class="form-control ins-num" disabled>
+	                                                <option value="0" selected></option>
+	                                                <option value="1">1</option>
+	                                                <option value="2">2</option>
+	                                                <option value="3">3</option>
+	                                                <option value="4">4</option>
+	                                                <option value="5">5</option>
+	                                                <option value="6">6</option>
+	                                                <option value="7">7</option>
+	                                                <option value="8">8</option>
+	                                                <option value="9">9</option>
+	                                                <option value="10">10</option>
+	                                                <option value="11">11</option>
+	                                                <option value="12">12</option>
+	                                                <option value="13">13</option>
+	                                                <option value="14">14</option>
+	                                                <option value="15">15</option>
+	                                                <option value="16">16</option>
+	                                                <option value="17">17</option>
+	                                                <option value="18">18</option>
+	                                                <option value="19">19</option>
+	                                                <option value="20">20</option>
+	                                                <option value="21">21</option>
+	                                                <option value="22">22</option>
+	                                                <option value="23">23</option>
+	                                                <option value="24">24</option>
+	                                                <option value="25">25</option>
+	                                                <option value="26">26</option>
+	                                                <option value="27">27</option>
+	                                                <option value="28">28</option>
+	                                                <option value="29">29</option>
+	                                                <option value="30">30</option>
+	                                                <option value="31">31</option>
+	                                            </select>
+	                                            <select class="form-control ins-cycle" disabled>
+	                                                <option value="99"></option>
+	                                                <option value="0">日</option>
+	                                                <option value="1">週</option>
+	                                                <option value="2">月</option>
+	                                            </select>
+	                                        </td>
+	                                        <td  class="ins-start-dt-td">
+	                                            <input type="text" class="form-control datepicker ins-start-dt" placeholder="点検開始日">
+	                                        </td>
+	                                        <td>
+	                                            <p>
+	                                                <input type="radio" name="file-upload-type" id="drag-and-drop" value="0" checked="checked"><label for="drag-and-drop">ドラッグ＆ドロップ</label>
+	                                                <input type="radio" name="file-upload-type" id="file-click" value="1"><label for="file-click">選択</label>
+	                                            </p>
+	                                            <div id="file-drop">
+	                                                <div id="dropzone" effectAllowed="move">Drog files here!</div>
+	                                                <ul id="files">
+	                                                    <li><a href="#"><i class="fa fa-file-pdf-o fa-fw" aria-hidden="true"></i>テンプレート１</a><i class="fa fa-times fa-2x trash-row-area" aria-hidden="true" style="color:red"></i></li>
+	                                                    <li><a href="#"><i class="fa fa-file-pdf-o fa-fw" aria-hidden="true"></i>テンプレート２</a><i class="fa fa-times fa-2x trash-row-area" aria-hidden="true" style="color:red"></i></li>
+	                                                    <li><a href="#"><i class="fa fa-file-pdf-o fa-fw" aria-hidden="true"></i>テンプレート３</a><i class="fa fa-times fa-2x trash-row-area" aria-hidden="true" style="color:red"></i></li>
+	                                                </ul>
+	                                            </div>
+	                                            <div id="file-select" style="display:none;">
+	                                                <div class="file-select-form">
+	                                                    <p class="input-file-btn btn btn-default">
+	                                                      ファイルを選択
+	                                                      <input type="file" class="input-file">
+	                                                    </p>
+	                                                    <span>選択されていません</span>
+	                                                </div>
+	                                            </div>
+	                                        </td>
+	                                        <td><button class="btn btn-default col-xs-12 col-sm-12 col-md-12 col-lg-12" onclick="delete_alert()">削除</button></td>
+	                                    </tr>
+	                                </tbody>
+	                            </table>
+							</div>
+                        </div>
+                        <button class="btn btn-default col-xs-12 col-sm-12 col-md-12 col-lg-12" onclick="add_alert()">行追加</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div>
+        <a href="#" id="save" class="second-right"><i class="fa fa-check-circle fa-4x" aria-hidden="true"></i><p class="text-center">登録</p></a>
+        <a href="#" id="top-scroll" class="first-right"><i class="fa fa-arrow-circle-up fa-4x" aria-hidden="true"></i><p class="text-center">先頭へ</p></a>
+    </div>
+</div>
+    </div>
+    <!-- Scripts -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/app.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/pickdate/picker.js"></script>
+    <script type="text/javascript" src="js/pickdate/picker.date.js"></script>
+    <script type="text/javascript" src="js/pickdate/picker.time.js"></script>
+    <script type="text/javascript" src="js/pickdate/legacy.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript">
+        var elDrop = document.getElementById('dropzone');
+        var elFiles = document.getElementById('files');
+
+		$("#save").on('click',function(){
+			var options = {
+			    title: "登録成功",
+			    text: "アラートは自動的に閉じます",
+			    icon: "success", // warning, info, error
+			    timer: 1500, // 3秒後に自動的にアラートを閉じる
+			    buttons: false,
+			  }
+			swal(options)
+		})
+
+
+        //
+        // ページ読込時処理
+        //
+        $(function(){
+            $('.datepicker').pickadate({
+                format: 'yyyy/mm/dd'
+            });
+        });
+
+        //
+        // 点検種類変更時
+        //
+        $('.ins-type').on('change',function(){
+            // 項目取得
+            var selectVal = $(this).val();
+            var insName = $(this).parent().nextAll('.ins-name-td').find('.ins-name');
+            var insNum = $(this).parent().nextAll('.ins-cycle-td').find('.ins-num');
+            var insCycle = $(this).parent().nextAll('.ins-cycle-td').find('.ins-cycle');
+            var insStartDt = $(this).parent().nextAll('.ins-start-dt-td').find('.ins-start-dt');
+
+            // DOM生成
+            var createCycle = '';
+            var createNum = '';
+
+            var d = new Date();
+            var year = d.getFullYear();
+            var month = d.getMonth()+1;
+            var day = d.getDay();
+            var dt = year + "/" + month + "/" + day;
+
+            switch (selectVal) {
+                // 始業点検
+                case "0":
+                    // 点検名セット
+                    $(insName).val("始業点検");
+                    // 周期セット
+                    $(insNum).val("").prop('disabled', true);
+                    $(insCycle).val("").prop('disabled', true);
+                    // 開始日セット
+                    $(insStartDt).val('');
+                    break;
+                // 日常点検
+                case "1":
+                    // 点検名セット
+                    $(insName).val("日常点検");
+                    // 周期セット
+                    $(insNum).val("1").prop('disabled', true);
+                    $(insCycle).val("0").prop('disabled', true);
+                    // 開始日セット
+                    $(insStartDt).val(dt);
+                    break;
+                // 定期点検
+                case "2":
+                    // 点検名セット
+                    $(insName).val("定期点検");
+                    // 周期セット
+                    $(insNum).val("1").prop('disabled', false);
+                    $(insCycle).val("2").prop('disabled', false);
+                    // 開始日セット
+                    $(insStartDt).val(dt);
+                    break;
+            }
+        });
+
+        //
+        // 周期変更時処理
+        //
+        $('.ins-cycle').on('change', function() {
+            var selectVal = $(this).val();
+            var num = $(this).prev('.ins-num').val();
+
+            switch (selectVal) {
+                // 日
+                case "0":
+                    break;
+                // 週
+                case "1":
+                    break;
+                // 月
+                case "2":
+                    break;
+            }
+        });
+
+        //
+        // ファイル選択ボタン
+        //
+        $('.input-file').on('change', function() {
+            var file_name = $(this).prop('files')[0].name;
+            var text = file_name + '&nbsp;<i class="fa fa-times fa-2x trash-row" aria-hidden="true" style="color:red"></i>';
+            $(this).parent().next().html(text);
+
+            var c = $('.file-select-form:first').clone(true);
+            $(c).children('p').children('.input-file').val();
+            $(c).children('span').empty();
+            $(c).insertAfter($(this).parent().parent());
+        });
+
+        //
+        // 行削除
+        //
+        $(document).on('click', '.trash-row', function(){
+            $(this).parent().parent().remove();
+        });
+
+        //
+        // 行削除
+        //
+        $(document).on('click', '.trash-row-area', function(){
+            $(this).parent().remove();
+        });
+
+        //
+        // 画面ロード時イベント
+        //
+        $(function(){
+            elDrop.addEventListener('dragover', function(event) {
+                    event.preventDefault();
+                    event.dataTransfer.dropEffect = 'copy';
+                    showDropping();
+            });
+
+            elDrop.addEventListener('dragleave', function(event) {
+                    hideDropping();
+            });
+
+            elDrop.addEventListener('drop', function(event) {
+                    event.preventDefault();
+                    hideDropping();
+
+                    var files = event.dataTransfer.files;
+                    showFiles(files);
+            });
+
+            document.addEventListener('click', function(event) {
+                var elTarget = event.target;
+                if (elTarget.tagName === 'IMG') {
+                    var src = elTarget.src;
+                    var w = window.open('about:blank');
+                    var d = w.document;
+                    var title = escapeHtml(elTarget.getAttribute('title'));
+
+                    d.open();
+                    d.write('<title>' + title + '</title>');
+                    d.write('<img src="' + src + '" />');
+                    d.close();
+                }
+            });
+
+            $('[name=file-upload-type]').click(function() {
+                if ($('input[name=file-upload-type]:eq(0)').prop('checked')) {
+                    $("#file-drop").css("display","block");
+                    $("#file-select").css("display","none");
+                } else {
+                    $("#file-drop").css("display","none");
+                    $("#file-select").css("display","block");
+                }
+            });
+        });
+
+        function showDropping() {
+            elDrop.classList.add('dropover');
+        }
+
+        function hideDropping() {
+            elDrop.classList.remove('dropover');
+        }
+
+        function showFiles(files) {
+            elFiles.innerHTML = '';
+
+            for (var i=0, l=files.length; i<l; i++) {
+                    var file = files[i];
+                    var elFile = buildElFile(file);
+                    elFiles.appendChild(elFile);
+            }
+        }
+
+        function buildElFile(file) {
+            var elFile = document.createElement('li');
+
+            // var text = file.name + ' (' + file.type + ',' + file.size + 'bytes)';
+            var text = file.name;
+            elFile.appendChild(document.createTextNode(text));
+
+            // 行削除アイコン追加
+            var i = document.createElement('i');
+            i.classList.add('fa');
+            i.classList.add('fa-times');
+            i.classList.add('fa-2x');
+            i.classList.add('trash-row-area');
+            i.style.color = 'red';
+
+            elFile.appendChild(i);
+
+            // if (file.type.indexOf('image/') === 0) {
+            //     var elImage = document.createElement('img');
+            //     elImage.src = URL_BLANK_IMAGE;
+            //     elFile.appendChild(elImage);
+            //
+            //     attachImage(file, elImage);
+            // }
+
+            return elFile;
+        }
+
+        function attachImage(file, elImage) {
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                var src = event.target.result;
+                elImage.src = src;
+                elImage.setAttribute('title', file.name);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function escapeHtml(source) {
+            var el = document.createElement('div');
+            el.appendChild(document.createTextNode(source));
+            var destination = el.innerHTML;
+            return destination;
+        }
+
+        function add_alert(){
+            alert("【モック用未実装】予定では行が追加されます");
+        }
+
+        function delete_alert(){
+            alert("【モック用未実装】予定では行が削除されます");
+        }
+    </script>
+</body>
+</html>

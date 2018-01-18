@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="O3Cna8mU0pAADteOj6lFyPDutpvX7CDfq722ZNgM">
+
+    <title>医療ガス安全管理システム</title>
+
+    <!-- Styles -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+    <link href="css/common.css" rel="stylesheet">
+    <link href="css/inspection.css?151231312" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/toastr.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+
+                    <!-- Collapsed Hamburger -->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <!-- Branding Image -->
+                    <a class="navbar-brand" href="home.html">
+                        医療ガス安全管理システム
+                    </a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="nav navbar-nav">
+                        <li><a>ログイン中グループ：株式会社ゲインシェアリング</a></li>
+                    </ul>
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- Authentication Links -->
+						<li><a href="group_invitation.html"><span class="mw"><i class="fa fa-users fa-fw" aria-hidden="true"></i>グループ招待</span></a></li>
+                        <li><a href="inspection_list.html"><span class="mw"><i class="fa fa-check-square-o fa-fw" aria-hidden="true"></i>点検管理</span></a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <span class="mw"><i class="fa fa-database fa-fw" aria-hidden="true"></i>マスタ管理 <span class="caret"></span></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+									<a href="user_list.html">ユーザーマスター</a>
+									<a href="equipment_list.html">設備マスター</a>
+									<a href="equipment_category_list.html">設備種類マスター</a>
+									<a href="attribute_list.html">属性マスター</a>
+									<a href="location_list.html">場所マスター</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <span class="mw"><i class="fa fa-user fa-fw" aria-hidden="true"></i>ユーザー名<span class="caret"></span></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+									<a href="personal_settings.html">個人設定</a>
+									<a href="group_select.html">グループ選択</a>
+									<a href="login.html">ログアウト</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="row">
+				<div>
+		            <div id="canvas-container">
+		                <div id="overlay-disp" class="overlay"></div>
+		                <canvas id="canvas-pdf"></canvas>
+		            </div>
+		        </div>
+
+		        <!-- モード表示 -->
+		        <div id="mode-display" onclick="toggleDraw()">
+		            <span id="mode-status">選択モード</span>
+		        </div>
+
+		        <!-- PDF左右切り替え -->
+		        <div>
+		            <span id="left-move"><i class="fa fa-angle-left fa-4x" aria-hidden="true"></i></span>
+		            <span id="right-move"><i class="fa fa-angle-right fa-4x" aria-hidden="true"></i></span>
+		        </div>
+
+		        <!-- 下部コントローラー -->
+		        <div id="controll-panel" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		            <div class="right">
+		                <i class="fa fa-thumbs-o-up fa-3x" aria-hidden="true" onClick="success_edit()"></i>
+		                <p class="text-center">正常</p>
+		            </div>
+		            <div class="right">
+		                <i class="fa fa-thumbs-o-down fa-3x" aria-hidden="true" onClick="error_edit()"></i>
+		                <p class="text-center">異常</p>
+		            </div>
+		            <div class="left">
+		                <i class="fa fa-pencil-square-o fa-3x" aria-hidden="true" onclick="edit_mode()"></i>
+		                <p class="text-center">編集</p>
+		            </div>
+		            <div class="left edit-act">
+		                <i class="fa fa-hand-paper-o fa-3x" aria-hidden="true" onclick="toggle_draw()"></i>
+		                <p class="text-center">手書き</p>
+		            </div>
+		            <div class="left edit-act">
+		                <i class="fa fa-circle-o-notch fa-3x" aria-hidden="true" onclick="seal()"></i>
+		                <p class="text-center">印鑑</p>
+		            </div>
+		            <div class="left edit-act">
+		                <i class="fa fa-trash-o fa-3x" aria-hidden="true" onclick="delete_draw()" onClick=""></i>
+		                <p class="text-center">削除</p>
+		            </div>
+		            <div class="left edit-act">
+		                <i class="fa fa-trash fa-3x" aria-hidden="true" onclick="delete_all_draw()"></i>
+		                <p class="text-center">全削除</p>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		    </div>
+		    <!-- Scripts -->
+		    <script src="js/app.js"></script>
+		    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		    <script type="text/javascript" src="js/common.js"></script>
+		    <script type="text/javascript" src="js/ajax.js"></script>
+		    <script type="text/javascript" src="js/fabric.min.js"></script>
+		    <script type="text/javascript" src="js/toastr.min.js"></script>
+		<script type="text/javascript">
+		    var canvas = document.getElementById('canvas-pdf');
+		    var fab_canvas = new fabric.Canvas('canvas-pdf');
+
+		    window.addEventListener('load', init,false);
+		    window.addEventListener('resize',canvas_resize,false);
+
+		    //
+		    // 初期化
+		    //
+		    function init(){
+		        // キャンバスリサイズ
+		        canvas_resize();
+		        // 背景画像をセット
+		        set_background();
+		        // 手書き入力禁止
+		        fab_canvas.isDrawingMode = false;
+		    }
+
+		    //
+		    // キャンバスリサイズ
+		    //
+		    function canvas_resize(){
+		        var backgroundImage = new Image();
+		        // キャンバスサイズのリサイズ
+		        backgroundImage.src = "image/1.jpg";
+		        backgroundImage.onload = function() {
+		            // キャンバスサイズ変更
+		            fab_canvas.setWidth(backgroundImage.width);
+		            fab_canvas.setHeight(backgroundImage.height);
+		        }
+		    }
+
+		    //
+		    // 印鑑出力
+		    //
+		    function seal(){
+		        fab_canvas.isDrawingMode = false;
+		        $('#mode-status').text("選択モード");
+		        $('#mode-display').css({ 'background-color' : 'rgba(255,140,0,0.8)' });
+		        fabric.Image.fromURL("image/innei.png", function(img) {
+		            var position_h = $(window).scrollTop() + $(window).height() / 2;
+		            var position_w = $(window).width() / 2;
+		            img.set({
+		                left: position_w,
+		                top: position_h
+		            });
+		            fab_canvas.add(img).setActiveObject(img);
+		        });
+		    }
+
+		    //
+		    // 背景画像をセット
+		    //
+		    function set_background(){
+		        fabric.Image.fromURL("image/1.jpg", function(img) {
+		            img.set({
+		                left: 0,
+		                top: 0,
+		                selectable : false
+		            });
+		            fab_canvas.add(img);
+		        });
+		    }
+
+		    //
+		    // 手書き入力切替
+		    //
+		    function toggle_draw(){
+		        if(fab_canvas.isDrawingMode){
+		            fab_canvas.isDrawingMode = false;
+		            $('#mode-status').text("選択モード");
+		            $('#mode-display').css({ 'background-color' : 'rgba(255,140,0,0.8)' });
+		        }else{
+		            fab_canvas.isDrawingMode = true;
+		            $('#mode-status').text("手書き入力モード");
+		            $('#mode-display').css({ 'background-color' : 'rgba(0,20,255,0.8)' });
+		        }
+		    }
+
+		    //
+		    //
+		    // 削除機能
+		    function delete_draw(){
+		        var allItems = fab_canvas.getObjects();
+		        if( allItems.length > 1 ){
+		            fab_canvas.remove(fab_canvas.item(allItems.length - 1));
+		        }
+		    }
+
+		    //
+		    // 全削除
+		    //
+		    function delete_all_draw(){
+		        fab_canvas.clear().renderAll();
+		        set_background();
+		    }
+
+		    //
+		    //
+		    // 編集モード
+		    function edit_mode(){
+		        // 選択解除
+
+		        // オーバーレイ生成
+		        $("#overlay-disp").toggleClass("overlay");
+		        $("#mode-display").toggleClass("display");
+		        $(".edit-act").toggleClass("display");
+		        // トースト表示
+		        toastr.options.timeOut = 1000;
+		        toastr.options.progressBar = true;
+		        toastr.info('編集モードを変更しました')
+		    }
+
+		    //
+		    // ページ移動
+		    //
+		    function success_edit(){
+		        swal({
+		            title: "正常登録",
+		            text: "ページが移動します",
+		            icon: "success",
+		            timer: 2000, // 2秒後に自動的にアラートを閉じる
+		            buttons: false
+		        });
+		        location.href = "inspection_confirm.html";
+		    }
+		    function error_edit(){
+		        swal({
+		            title: "異常登録",
+		            text: "ページが移動します",
+		            icon: "warning",
+		            timer: 2000, // 2秒後に自動的にアラートを閉じる
+		            buttons: false
+		        });
+		        location.href = "inspection_confirm.html";
+		    }
+
+		</script>
+</body>
+</html>
