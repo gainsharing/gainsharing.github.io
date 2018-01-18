@@ -1,3 +1,7 @@
+body{
+	background-color: gray;
+}
+
 /*
 * PDF書き込み用にベースCSS修正
 */
@@ -16,39 +20,38 @@
 * コンテンツCSS
 */
 #canvas-container{
-    background-color: #EEE;
     height: 100vh;
     margin:0em;
     padding: 0em;
 }
 
-#canvas_pdf{
+#canvas-pdf{
+	background-color: white;
 }
 
 #controller{
     position: fixed;
-    bottom: 0;
-}
-
-#controller button{
-
 }
 
 /*
-ソフトウェア起動
+* ステータス
 */
-#software-start{
-    top:5em;
-    left:0em;
-    position: fixed;
-    z-index:9999!important;
-    background-color: rgba(0,0,0,0.5);
-    padding: 1em;
+#mode-display{
+	position: fixed;
+	top: 5em;
+	right: 3em;
+	background-color: rgba(255,140,0,0.8);
+	border-radius: 1em;        /* CSS3草案 */
+	-webkit-border-radius: 1em;    /* Safari,Google Chrome用 */
+	-moz-border-radius: 1em;   /* Firefox用 */
+	cursor: pointer;
+	display: none;
 }
 
-#software-start i{
-    margin-right: 0.5em;
-    color: white;
+#mode-status{
+	color: white;
+	padding: 2em;
+	font-size: 1.3em;
 }
 
 /*
@@ -58,7 +61,7 @@ PDF左右切り替え
     left: 0em;
     top: 10em;
     position: fixed;
-    background-color: gray;
+    background-color: rgba(34,139,34,0.5);
     color: white;
     padding: 0.5em;
 }
@@ -67,9 +70,23 @@ PDF左右切り替え
     right: 0em;
     top: 10em;
     position: fixed;
-    background-color: gray;
+    background-color: rgba(34,139,34,0.5);
     color: white;
     padding: 0.5em;
+}
+
+/*
+オーバーレイ
+*/
+.overlay{
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	position: fixed;
+}
+
+.display{
+	display: inline!important;
 }
 
 /*
@@ -81,9 +98,31 @@ PDF左右切り替え
     bottom: 0em;
     background-color: rgba(0,0,0,0.5);
     color: white;
+	z-index: 9999!important;
+}
+
+.edit-act{
+	display: none;
 }
 
 .right{
     margin-right: 1em;
     float: right;
+}
+
+.left{
+	margin-left: 1em;
+	float: left;
+}
+
+/*
+* 印刷時設定
+*/
+@media print{
+	#mode-display,
+	#controll-panel,
+	#left-move,
+	#right-move {
+		display:none;
+	}
 }

@@ -17,6 +17,7 @@
     <link href="css/common.css" rel="stylesheet">
     <link href="css/inspection.css?1514278366" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/toastr.min.css" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -84,68 +85,203 @@
 
         <div class="container">
             <div class="row">
-                <div>
-                    <div id="canvas-container">
-                        <canvas id="canvas_pdf"></canvas>
-                    </div>
-                    <!-- <h2>画像出力<h2>
-                    <div id="img-box"><img id="newImg"></div> -->
-                </div>
-            </div>
-        </div>
+				<div>
+		            <div id="canvas-container">
+		                <div id="overlay-disp" class="overlay"></div>
+		                <canvas id="canvas-pdf"></canvas>
+		            </div>
+		        </div>
 
-        <!-- 外部アプリ -->
-        <div id="software-start">
-            <i class="fa fa-camera fa-2x" aria-hidden="true"></i>
-            <i class="fa fa-microphone fa-2x" aria-hidden="true"></i>
-        </div>
+		        <!-- モード表示 -->
+		        <div id="mode-display" onclick="toggleDraw()">
+		            <span id="mode-status">選択モード</span>
+		        </div>
 
-        <!-- PDF左右切り替え -->
-        <div>
-            <span id="left-move"><i class="fa fa-angle-left fa-4x" aria-hidden="true"></i></span>
-            <span id="right-move"><i class="fa fa-angle-right fa-4x" aria-hidden="true"></i></span>
-        </div>
+		        <!-- PDF左右切り替え -->
+		        <div>
+		            <span id="left-move"><i class="fa fa-angle-left fa-4x" aria-hidden="true"></i></span>
+		            <span id="right-move"><i class="fa fa-angle-right fa-4x" aria-hidden="true"></i></span>
+		        </div>
 
-        <!-- 下部コントローラー -->
-        <div id="controll-panel" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="right">
-                <i class="fa fa-thumbs-o-up fa-3x" aria-hidden="true" onClick="pagejump()"></i>
-                <p class="text-center">正常</p>
-            </div>
-            <div class="right">
-                <i class="fa fa-thumbs-o-down fa-3x" aria-hidden="true" onClick="pagejump()"></i>
-                <p class="text-center">異常</p>
-            </div>
-            <div class="right">
-                <i class="fa fa-forward fa-3x" aria-hidden="true" onClick=""></i>
-                <p class="text-center">進む</p>
-            </div>
-            <div class="right">
-                <i class="fa fa-repeat fa-3x" aria-hidden="true" onClick=""></i>
-                <p class="text-center">ﾘｾｯﾄ</p>
-            </div>
-            <div class="right">
-                <i class="fa fa-backward fa-3x" aria-hidden="true" id="cn-back" onClick=""></i>
-                <p class="text-center">戻る</p>
-            </div>
-            <div class="right">
-                <i class="fa fa-cube fa-3x" aria-hidden="true" id="test"></i>
-                <p class="text-center">印鑑</p>
-            </div>
-        </div>
-    </div>
-    <!-- Scripts -->
-    <script src="js/app.js"></script>
-    <script type="text/javascript" src="js/common.js"></script>
-    <script type="text/javascript" src="js/ajax.js"></script>
-    <script type="text/javascript">
-    function pagejump(){
-        location.href = "inspection_confirm.html";
-    }
-    function pageback(){
-        location.href = "selection.html";
-    }
-</script>
-<script src="js/canvas.js"></script>
+		        <!-- 下部コントローラー -->
+		        <div id="controll-panel" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		            <div class="right">
+		                <i class="fa fa-thumbs-o-up fa-3x" aria-hidden="true" onClick="success_edit()"></i>
+		                <p class="text-center">正常</p>
+		            </div>
+		            <div class="right">
+		                <i class="fa fa-thumbs-o-down fa-3x" aria-hidden="true" onClick="error_edit()"></i>
+		                <p class="text-center">異常</p>
+		            </div>
+		            <div class="left">
+		                <i class="fa fa-pencil-square-o fa-3x" aria-hidden="true" onclick="edit_mode()"></i>
+		                <p class="text-center">編集</p>
+		            </div>
+		            <div class="left edit-act">
+		                <i class="fa fa-hand-paper-o fa-3x" aria-hidden="true" onclick="toggle_draw()"></i>
+		                <p class="text-center">手書き</p>
+		            </div>
+		            <div class="left edit-act">
+		                <i class="fa fa-circle-o-notch fa-3x" aria-hidden="true" onclick="seal()"></i>
+		                <p class="text-center">印鑑</p>
+		            </div>
+		            <div class="left edit-act">
+		                <i class="fa fa-trash-o fa-3x" aria-hidden="true" onclick="delete_draw()" onClick=""></i>
+		                <p class="text-center">削除</p>
+		            </div>
+		            <div class="left edit-act">
+		                <i class="fa fa-trash fa-3x" aria-hidden="true" onclick="delete_all_draw()"></i>
+		                <p class="text-center">全削除</p>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		    </div>
+		    <!-- Scripts -->
+		    <script src="js/app.js"></script>
+		    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		    <script type="text/javascript" src="js/common.js"></script>
+		    <script type="text/javascript" src="js/ajax.js"></script>
+		    <script type="text/javascript" src="js/fabric.min.js"></script>
+		    <script type="text/javascript" src="js/toastr.min.js"></script>
+		<script type="text/javascript">
+		    var canvas = document.getElementById('canvas-pdf');
+		    var fab_canvas = new fabric.Canvas('canvas-pdf');
+
+		    window.addEventListener('load', init,false);
+		    window.addEventListener('resize',canvas_resize,false);
+
+		    //
+		    // 初期化
+		    //
+		    function init(){
+		        // キャンバスリサイズ
+		        canvas_resize();
+		        // 背景画像をセット
+		        set_background();
+		        // 手書き入力禁止
+		        fab_canvas.isDrawingMode = false;
+		    }
+
+		    //
+		    // キャンバスリサイズ
+		    //
+		    function canvas_resize(){
+		        var backgroundImage = new Image();
+		        // キャンバスサイズのリサイズ
+		        backgroundImage.src = "image/1.jpg";
+		        backgroundImage.onload = function() {
+		            // キャンバスサイズ変更
+		            fab_canvas.setWidth(backgroundImage.width);
+		            fab_canvas.setHeight(backgroundImage.height);
+		        }
+		    }
+
+		    //
+		    // 印鑑出力
+		    //
+		    function seal(){
+		        fab_canvas.isDrawingMode = false;
+		        $('#mode-status').text("選択モード");
+		        $('#mode-display').css({ 'background-color' : 'rgba(255,140,0,0.8)' });
+		        fabric.Image.fromURL("image/innei.png", function(img) {
+		            var position_h = $(window).scrollTop() + $(window).height() / 2;
+		            var position_w = $(window).width() / 2;
+		            img.set({
+		                left: position_w,
+		                top: position_h
+		            });
+		            fab_canvas.add(img).setActiveObject(img);
+		        });
+		    }
+
+		    //
+		    // 背景画像をセット
+		    //
+		    function set_background(){
+		        fabric.Image.fromURL("image/1.jpg", function(img) {
+		            img.set({
+		                left: 0,
+		                top: 0,
+		                selectable : false
+		            });
+		            fab_canvas.add(img);
+		        });
+		    }
+
+		    //
+		    // 手書き入力切替
+		    //
+		    function toggle_draw(){
+		        if(fab_canvas.isDrawingMode){
+		            fab_canvas.isDrawingMode = false;
+		            $('#mode-status').text("選択モード");
+		            $('#mode-display').css({ 'background-color' : 'rgba(255,140,0,0.8)' });
+		        }else{
+		            fab_canvas.isDrawingMode = true;
+		            $('#mode-status').text("手書き入力モード");
+		            $('#mode-display').css({ 'background-color' : 'rgba(0,20,255,0.8)' });
+		        }
+		    }
+
+		    //
+		    //
+		    // 削除機能
+		    function delete_draw(){
+		        var allItems = fab_canvas.getObjects();
+		        if( allItems.length > 1 ){
+		            fab_canvas.remove(fab_canvas.item(allItems.length - 1));
+		        }
+		    }
+
+		    //
+		    // 全削除
+		    //
+		    function delete_all_draw(){
+		        fab_canvas.clear().renderAll();
+		        set_background();
+		    }
+
+		    //
+		    //
+		    // 編集モード
+		    function edit_mode(){
+		        // 選択解除
+
+		        // オーバーレイ生成
+		        $("#overlay-disp").toggleClass("overlay");
+		        $("#mode-display").toggleClass("display");
+		        $(".edit-act").toggleClass("display");
+		        // トースト表示
+		        toastr.options.timeOut = 1000;
+		        toastr.options.progressBar = true;
+		        toastr.info('編集モードを変更しました')
+		    }
+
+		    //
+		    // ページ移動
+		    //
+		    function success_edit(){
+		        swal({
+		            title: "正常登録",
+		            text: "ページが移動します",
+		            icon: "success",
+		            timer: 2000, // 2秒後に自動的にアラートを閉じる
+		            buttons: false
+		        });
+		        location.href = "inspection_confirm.html";
+		    }
+		    function error_edit(){
+		        swal({
+		            title: "異常登録",
+		            text: "ページが移動します",
+		            icon: "warning",
+		            timer: 2000, // 2秒後に自動的にアラートを閉じる
+		            buttons: false
+		        });
+		        location.href = "inspection_confirm.html";
+		    }
+
+		</script>
 </body>
 </html>
