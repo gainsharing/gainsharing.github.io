@@ -103,6 +103,36 @@
 		            <span id="right-move"><i class="fa fa-angle-right fa-4x" aria-hidden="true"></i></span>
 		        </div>
 
+                <!-- 文字入力フォーム -->
+                <div id="text-form">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="InputText">入力文字</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="InputText" placeholder="入力文字">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="InputSize">サイズ(px)</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" id="InputSize" placeholder="サイズ(px)" value="15">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="InputColor">カラー</label>
+                            <div class="col-sm-8">
+                                <input type="color" class="form-control" id="InputColor" placeholder="カラー">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-default col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-xs-10 col-sm-10 col-md-10 col-lg-10" onclick="text_output()">
+                                <i class="fa fa-font" aria-hidden="true" onclick="text_draw()"></i>
+                                入力文字印字
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
 		        <!-- 下部コントローラー -->
 		        <div id="controll-panel" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		            <div class="right">
@@ -121,6 +151,10 @@
 		                <i class="fa fa-hand-paper-o fa-3x" aria-hidden="true" onclick="toggle_draw()"></i>
 		                <p class="text-center">手書き</p>
 		            </div>
+                    <div class="left edit-act">
+                        <i class="fa fa-font fa-3x" aria-hidden="true" onclick="text_draw()"></i>
+                        <p class="text-center">文字</p>
+                    </div>
 		            <div class="left edit-act">
 		                <i class="fa fa-circle-o-notch fa-3x" aria-hidden="true" onclick="seal()"></i>
 		                <p class="text-center">印鑑</p>
@@ -145,145 +179,200 @@
 		    <script type="text/javascript" src="js/fabric.min.js"></script>
 		    <script type="text/javascript" src="js/toastr.min.js"></script>
 		<script type="text/javascript">
-		    var canvas = document.getElementById('canvas-pdf');
-		    var fab_canvas = new fabric.Canvas('canvas-pdf');
+        var canvas = document.getElementById('canvas-pdf');
+        var fab_canvas = new fabric.Canvas('canvas-pdf');
 
-		    window.addEventListener('load', init,false);
-		    window.addEventListener('resize',canvas_resize,false);
+        window.addEventListener('load', init,false);
+        window.addEventListener('resize',canvas_resize,false);
 
-		    //
-		    // 初期化
-		    //
-		    function init(){
-		        // キャンバスリサイズ
-		        canvas_resize();
-		        // 背景画像をセット
-		        set_background();
-		        // 手書き入力禁止
-		        fab_canvas.isDrawingMode = false;
-		    }
+        //
+        // 初期化
+        //
+        function init(){
+            // キャンバスリサイズ
+            canvas_resize();
+            // 背景画像をセット
+            set_background();
+            // 手書き入力禁止
+            fab_canvas.isDrawingMode = false;
+        }
 
-		    //
-		    // キャンバスリサイズ
-		    //
-		    function canvas_resize(){
-		        var backgroundImage = new Image();
-		        // キャンバスサイズのリサイズ
-		        backgroundImage.src = "image/1.jpg";
-		        backgroundImage.onload = function() {
-		            // キャンバスサイズ変更
-		            fab_canvas.setWidth(backgroundImage.width);
-		            fab_canvas.setHeight(backgroundImage.height);
-		        }
-		    }
+        //
+        // キャンバスリサイズ
+        //
+        function canvas_resize(){
+            var backgroundImage = new Image();
+            // キャンバスサイズのリサイズ
+            backgroundImage.src = "image/1.jpg";
+            backgroundImage.onload = function() {
+                // キャンバスサイズ変更
+                fab_canvas.setWidth(backgroundImage.width);
+                fab_canvas.setHeight(backgroundImage.height);
+            }
+        }
 
-		    //
-		    // 印鑑出力
-		    //
-		    function seal(){
-		        fab_canvas.isDrawingMode = false;
-		        $('#mode-status').text("選択モード");
-		        $('#mode-display').css({ 'background-color' : 'rgba(255,140,0,0.8)' });
-		        fabric.Image.fromURL("image/innei.png", function(img) {
-		            var position_h = $(window).scrollTop() + $(window).height() / 2;
-		            var position_w = $(window).width() / 2;
-		            img.set({
-		                left: position_w,
-		                top: position_h
-		            });
-		            fab_canvas.add(img).setActiveObject(img);
-		        });
-		    }
+        //
+        // 印鑑出力
+        //
+        function seal(){
+            // テキストフォーム非表示
+            close_textform();
+            // 印鑑出力
+            fab_canvas.isDrawingMode = false;
+            $('#mode-status').text("選択モード");
+            $('#mode-display').css({ 'background-color' : 'rgba(255,140,0,0.8)' });
+            fabric.Image.fromURL("image/innei.png", function(img) {
+                var position_h = $(window).scrollTop() + $(window).height() / 2;
+                var position_w = $(window).width() / 2;
+                img.set({
+                    left: position_w,
+                    top: position_h
+                });
+                fab_canvas.add(img).setActiveObject(img);
+            });
+        }
 
-		    //
-		    // 背景画像をセット
-		    //
-		    function set_background(){
-		        fabric.Image.fromURL("image/1.jpg", function(img) {
-		            img.set({
-		                left: 0,
-		                top: 0,
-		                selectable : false
-		            });
-		            fab_canvas.add(img);
-		        });
-		    }
+        //
+        // 背景画像をセット
+        //
+        function set_background(){
+            fabric.Image.fromURL("image/1.jpg", function(img) {
+                img.set({
+                    left: 0,
+                    top: 0,
+                    selectable : false
+                });
+                fab_canvas.add(img);
+            });
+        }
 
-		    //
-		    // 手書き入力切替
-		    //
-		    function toggle_draw(){
-		        if(fab_canvas.isDrawingMode){
-		            fab_canvas.isDrawingMode = false;
-		            $('#mode-status').text("選択モード");
-		            $('#mode-display').css({ 'background-color' : 'rgba(255,140,0,0.8)' });
-		        }else{
-		            fab_canvas.isDrawingMode = true;
-		            $('#mode-status').text("手書き入力モード");
-		            $('#mode-display').css({ 'background-color' : 'rgba(0,20,255,0.8)' });
-		        }
-		    }
+        //
+        // 手書き入力切替
+        //
+        function toggle_draw(){
+            // テキストフォーム非表示
+            close_textform();
+            // 手書き入力制御
+            if(fab_canvas.isDrawingMode){
+                fab_canvas.isDrawingMode = false;
+                $('#mode-status').text("選択モード");
+                $('#mode-display').css({ 'background-color' : 'rgba(255,140,0,0.8)' });
+            }else{
+                fab_canvas.isDrawingMode = true;
+                $('#mode-status').text("手書き入力モード");
+                $('#mode-display').css({ 'background-color' : 'rgba(0,20,255,0.8)' });
+            }
+        }
 
-		    //
-		    //
-		    // 削除機能
-		    function delete_draw(){
-		        var allItems = fab_canvas.getObjects();
-		        if( allItems.length > 1 ){
-		            fab_canvas.remove(fab_canvas.item(allItems.length - 1));
-		        }
-		    }
+        //
+        // 文字フォーム制御
+        //
+        function text_draw(){
+            fab_canvas.isDrawingMode = false;
+            $("#text-form").toggle(500);
+        }
 
-		    //
-		    // 全削除
-		    //
-		    function delete_all_draw(){
-		        fab_canvas.clear().renderAll();
-		        set_background();
-		    }
+        //
+        // 文字入力
+        //
+        function text_output(){
+            var txt = $("#InputText").val();
+            var size = $("#InputSize").val();
+            var color = $("#InputColor").val();
 
-		    //
-		    //
-		    // 編集モード
-		    function edit_mode(){
-		        // 選択解除
+            // 空白の場合、リターン
+            if(txt == ""){
+                return;
+            }
 
-		        // オーバーレイ生成
-		        $("#overlay-disp").toggleClass("overlay");
-		        $("#mode-display").toggleClass("display");
-		        $(".edit-act").toggleClass("display");
-		        // トースト表示
-		        toastr.options.timeOut = 1000;
-		        toastr.options.progressBar = true;
-		        toastr.info('編集モードを変更しました')
-		    }
+            // サイズの数値チェック
+            if(isNaN(size)){
+                returnl
+            }
 
-		    //
-		    // ページ移動
-		    //
-		    function success_edit(){
-		        swal({
-		            title: "正常登録",
-		            text: "ページが移動します",
-		            icon: "success",
-		            timer: 2000, // 2秒後に自動的にアラートを閉じる
-		            buttons: false
-		        }).then(function(){
-        			location.href = "inspection_confirm.html";
-        		});
-		    }
-		    function error_edit(){
-		        swal({
-		            title: "異常登録",
-		            text: "ページが移動します",
-		            icon: "warning",
-		            timer: 2000, // 2秒後に自動的にアラートを閉じる
-		            buttons: false
-		        }).then(function(){
-        			location.href = "inspection_confirm.html";
-        		});
-		    }
+            var strings = txt;
+            var position_h = $(window).scrollTop() + $(window).height() / 2;
+            var position_w = $(window).width() / 2;
+            var text = new fabric.Text(strings, {
+                top: position_h,
+                left: position_w,
+                fontFamily: 'Arial',
+                fontSize: size,
+                fill: color
+            });
+            fab_canvas.add(text);
+        }
 
+        //
+        // 削除機能
+        //
+        function delete_draw(){
+            var allItems = fab_canvas.getObjects();
+            if( allItems.length > 1 ){
+                fab_canvas.remove(fab_canvas.item(allItems.length - 1));
+            }
+        }
+
+        //
+        // 全削除
+        //
+        function delete_all_draw(){
+            fab_canvas.clear().renderAll();
+            set_background();
+        }
+
+        //
+        // 編集モード
+        //
+        function edit_mode(){
+            // テキストフォーム非表示
+            close_textform();
+
+            // 選択解除
+
+            // オーバーレイ生成
+            $("#overlay-disp").toggleClass("overlay");
+            $("#mode-display").toggleClass("display");
+            $(".edit-act").toggleClass("display");
+            // トースト表示
+            toastr.options.timeOut = 1000;
+            toastr.options.progressBar = true;
+            toastr.info('編集モードを変更しました')
+        }
+
+        //
+        // 入力フォーム非表示
+        //
+        function close_textform(){
+            $("#text-form").hide('slow');
+        }
+
+        //
+        // ページ移動
+        //
+        function success_edit(){
+            swal({
+                title: "正常登録",
+                text: "ページが移動します",
+                icon: "success",
+                timer: 2000, // 2秒後に自動的にアラートを閉じる
+                buttons: false
+            }).then(function(){
+    			location.href = "inspection_confirm.html";
+    		});
+
+        }
+        function error_edit(){
+            swal({
+                title: "異常登録",
+                text: "ページが移動します",
+                icon: "warning",
+                timer: 2000, // 2秒後に自動的にアラートを閉じる
+                buttons: false
+            }).then(function(){
+    			location.href = "inspection_confirm.html";
+    		});
+        }
 		</script>
 </body>
 </html>

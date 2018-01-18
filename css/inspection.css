@@ -76,6 +76,21 @@ PDF左右切り替え
 }
 
 /*
+テキスト入力フォーム
+*/
+#text-form{
+	height: 100%;
+	position: fixed;
+	z-index: 9999!important;
+	top: 0em;
+	right: 0em;
+	background-color: rgba(0,0,0,0.7);
+	padding: 1em;
+	color: white;
+	display: none;
+}
+
+/*
 オーバーレイ
 */
 .overlay{
