@@ -268,8 +268,9 @@
 		            icon: "success",
 		            timer: 2000, // 2秒後に自動的にアラートを閉じる
 		            buttons: false
-		        });
-		        location.href = "inspection_confirm.html";
+		        }).then(function(){
+        			location.href = "inspection_confirm.html";
+        		});
 		    }
 		    function error_edit(){
 		        swal({
@@ -278,8 +279,9 @@
 		            icon: "warning",
 		            timer: 2000, // 2秒後に自動的にアラートを閉じる
 		            buttons: false
-		        });
-		        location.href = "inspection_confirm.html";
+		        }).then(function(){
+        			location.href = "inspection_confirm.html";
+        		});
 		    }
 
 		</script>
