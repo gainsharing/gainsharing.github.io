@@ -307,10 +307,7 @@
         // 削除機能
         //
         function delete_draw(){
-            var allItems = fab_canvas.getObjects();
-            if( allItems.length > 1 ){
-                fab_canvas.remove(fab_canvas.item(allItems.length - 1));
-            }
+			fab_canvas.remove(fab_canvas.getActiveObject());
         }
 
         //
